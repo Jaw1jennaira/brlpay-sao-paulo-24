@@ -1,0 +1,10 @@
+# Foundry build output
+out/
+cache/
+# Broadcast cache may hold sensitive values — never commit
+# (broadcast/ tx receipts are fine and kept for the record)
+# Local env / keys — never commit
+.env
+*.key
+# OS / editor
+.DS_Store

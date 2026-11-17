@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BRLPay — Stablecoin payments that feel like Pix</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+  h1 { font-size: 1.6rem; } h2 { font-size: 1.2rem; margin-top: 2rem; }
+  .card { border: 1px solid #ddd; border-radius: 12px; padding: 1rem; margin: 1rem 0; }
+  label { display: block; margin: .5rem 0 .2rem; font-weight: 600; }
+  input, button { font-size: 1rem; padding: .5rem; }
+  input { width: 100%; box-sizing: border-box; }
+  button { background: #1a73e8; color: #fff; border: 0; border-radius: 8px; cursor: pointer; margin-top: .75rem; }
+  button:disabled { opacity: .5; cursor: default; }
+  .muted { color: #666; font-size: .9rem; }
+  .ok { color: #137333; } .err { color: #b3261e; }
+  code { background: #f2f2f2; padding: 0 .3rem; border-radius: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  td, th { border-bottom: 1px solid #eee; padding: .4rem .2rem; text-align: left; }
+</style>
+</head>
+<body>
+<h1>BRLPay</h1>
+<p>Stablecoin payments that feel like Pix — for Brazilian small merchants.
+A merchant creates an invoice in reais; the customer pays in USDG; funds
+settle instantly on Arbitrum Sepolia. No custody, no admin.</p>
+<p class="muted">Contracts (Arbitrum Sepolia, chain 421614):
+BRLPay <code id="brlpayAddr"></code> ·
+mUSDG <code id="usdgAddr"></code> ·
+<a href="https://github.com/Jaw1jennaira/brlpay-sao-paulo-24">GitHub</a></p>
+
+<div class="card">
+  <h2>1. Connect wallet</h2>
+  <button id="connectBtn">Connect MetaMask</button>
+  <p id="walletInfo" class="muted">Not connected. MetaMask must be on Arbitrum Sepolia.</p>
+  <p><button id="mintBtn" disabled>Get $100 test mUSDG (demo faucet)</button></p>
+</div>
+
+<div class="card">
+  <h2>2. Merchant: create an invoice</h2>
+  <label>Amount in USDG (e.g. 5.00)</label>
+  <input id="invUsd" type="number" step="0.01" min="0.01" value="5.00">
+  <label>Amount in BRL (e.g. 25.00)</label>
+  <input id="invBrl" type="number" step="0.01" min="0.01" value="25.00">
+  <label>Description</label>
+  <input id="invDesc" type="text" value="Café + pão de queijo">
+  <label>Valid for (minutes)</label>
+  <input id="invValid" type="number" min="1" value="60">
+  <button id="createBtn" disabled>Create invoice</button>
+  <p id="createMsg" class="muted"></p>
+</div>
+
+<div class="card">
+  <h2>3. Customer: pay an invoice</h2>
+  <label>Invoice ID</label>
+  <input id="payId" type="number" min="1" value="1">
+  <button id="payBtn" disabled>Approve + pay</button>
+  <p id="payMsg" class="muted"></p>
+</div>
+
+<div class="card">
+  <h2>Recent invoices</h2>
+  <button id="refreshBtn">Refresh list</button>
+  <table><thead><tr><th>ID</th><th>Description</th><th>BRL</th><th>USDG</th><th>Status</th></tr></thead>
+  <tbody id="invTable"><tr><td colspan="5" class="muted">Connect a wallet, then refresh.</td></tr></tbody></table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.0/dist/ethers.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
