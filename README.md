@@ -15,7 +15,7 @@ symbols. BRLPay closes that gap: the invoice is denominated in **reais**
 stablecoin, the hackathon's highlighted integration), and the UX is Pix —
 create a request, pay it, get a receipt, done.
 
-Why this idea won over the alternatives (see `docs/` in the plan file):
+Why this idea won over the alternatives:
 
 - **Payments is a stated priority sector** for the judges (payments &
   stablecoin, DeFi, RWA, privacy, consumer, native-Arbitrum tooling),
@@ -80,7 +80,7 @@ python3 -m http.server --directory frontend 8080
 # open http://localhost:8080
 ```
 
-Deploy (fresh): `python3 ../deploy-brlpay.py` (reads the MUSE key from the
+Deploy (fresh): `python3 ../../deploy-brlpay.py` (reads the MUSE key from the
 farming wallet file; never prints it) — or
 `PRIVATE_KEY=0x... forge script script/Deploy.s.sol --rpc-url arbitrum_sepolia --broadcast`.
 
